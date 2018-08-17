@@ -1,17 +1,17 @@
 # microservice-communication
 Implements Microservice Communication using Spring Boot and its advanced features
 
-MicroserviceConfigServer
+MicroserviceConfigServer :
 Spring Cloud Config Server for holding Microservices configuration
 
-EurekaServerConfig
+EurekaServerConfig :
 Discovery Service implemented using Spring Cloud Netflix Eureka
 
-EmployeeService
+EmployeeService :
 Micorservice for Employee CRUD Operations
 
-DepartmentService
+DepartmentService :
 Department Microservice, which communicates with Employee Service.
 
-OrganizationService
+OrganizationService :
 Organization Microservice which communicates with Employee & Department Services. Spring Cloud Open Feign is used for the Client Communication.
