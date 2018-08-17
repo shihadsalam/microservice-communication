@@ -11,7 +11,7 @@ import com.microservice.OrganizationService.model.Employee;
 @FeignClient(name = "EmployeeService")
 public interface EmployeeClient {
 
-	@GetMapping("/organization/{organizationId}")
-	List<Employee> findByOrganization(@PathVariable("organizationId") Long organizationId);
+	@GetMapping("/get-by-organization/{organizationId}")
+	public List<Employee> findByOrganization(@PathVariable("organizationId") Long organizationId);
 	
 }

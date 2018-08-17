@@ -2,13 +2,6 @@ package com.microservice.EmployeeService;
 
 public class MyConstants {
 
-	public static final String API_URL = "/api/employeecrud/";
-	
-	public static final String EMP_ENDPOINT = "employees";
-	
-	public static final String ADD_EMP_ENDPOINT = "addEmployee";
-	
-	public static final String MOD_EMP_ENDPOINT = "updateEmployee";
 	
 	public static final String ADD_EMP_API_DOC_VALUE = "Register an Employee";
 	

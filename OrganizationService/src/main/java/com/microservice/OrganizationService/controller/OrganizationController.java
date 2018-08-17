@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microservice.OrganizationService.DepartmentClient;
@@ -31,25 +32,28 @@ public class OrganizationController {
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@PostMapping
+	@PostMapping("/add-organizations")
 	public Organization add(@RequestBody Organization organization) {
 		LOGGER.info("Organization add: {}", organization);
 		return organizationService.add(organization);
 	}
 	
-	@GetMapping
+	@GetMapping("/get-all-organizations")
+	@ResponseBody
 	public List<Organization> findAll() {
 		LOGGER.info("Organization find");
 		return organizationService.findAll();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("get-organization/{id}")
+	@ResponseBody
 	public Organization findById(@PathVariable("id") Long id) {
 		LOGGER.info("Organization find: id={}", id);
 		return organizationService.findById(id);
 	}
 
-	@GetMapping("/{id}/with-departments")
+	@GetMapping("get-organization-with-departments/{id}")
+	@ResponseBody
 	public Organization findByIdWithDepartments(@PathVariable("id") Long id) {
 		LOGGER.info("Organization find: id={}", id);
 		Organization organization = organizationService.findById(id);
@@ -57,7 +61,8 @@ public class OrganizationController {
 		return organization;
 	}
 	
-	@GetMapping("/{id}/with-departments-and-employees")
+	@GetMapping("get-organization-with-departments-and-employees/{id}")
+	@ResponseBody
 	public Organization findByIdWithDepartmentsAndEmployees(@PathVariable("id") Long id) {
 		LOGGER.info("Organization find: id={}", id);
 		Organization organization = organizationService.findById(id);
@@ -65,7 +70,8 @@ public class OrganizationController {
 		return organization;
 	}
 	
-	@GetMapping("/{id}/with-employees")
+	@GetMapping("get-organization-with-employees/{id}")
+	@ResponseBody
 	public Organization findByIdWithEmployees(@PathVariable("id") Long id) {
 		LOGGER.info("Organization find: id={}", id);
 		Organization organization = organizationService.findById(id);

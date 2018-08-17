@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: GatewayService
+  cloud:
+    config:
+      uri: http://localhost:9090
+
+server:
+  port: 9091
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  pattern: 
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+              
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: EmployeeService
+        uri: lb://EmployeeService
+        predicates:
+        - Path=/employee/**
+        filters:
+        - RewritePath=/employee/(?<path>.*), /$\{path}
+      - id: DepartmentService
+        uri: lb://DepartmentService
+        predicates:
+        - Path=/department/**
+        filters:
+        - RewritePath=/department/(?<path>.*), /$\{path}
+      - id: OrganizationService
+        uri: lb://OrganizationService
+        predicates:
+        - Path=/organization/**
+        filters:
+        - RewritePath=/organization/(?<path>.*), /$\{path}

@@ -11,10 +11,10 @@ import com.microservice.OrganizationService.model.Department;
 @FeignClient(name = "DepartmentService")
 public interface DepartmentClient {
 
-	@GetMapping("/organization/{organizationId}")
+	@GetMapping("/get-by-organization/{organizationId}")
 	public List<Department> findByOrganization(@PathVariable("organizationId") Long organizationId);
 	
-	@GetMapping("/organization/{organizationId}/with-employees")
+	@GetMapping("/get-by-organization-with-employees/{organizationId}")
 	public List<Department> findByOrganizationWithEmployees(@PathVariable("organizationId") Long organizationId);
 	
 }

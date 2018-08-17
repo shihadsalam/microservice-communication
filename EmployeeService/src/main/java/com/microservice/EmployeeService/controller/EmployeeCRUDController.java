@@ -1,6 +1,5 @@
 package com.microservice.EmployeeService.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -29,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RefreshScope
-@RequestMapping(value = MyConstants.API_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class EmployeeCRUDController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeCRUDController.class);
@@ -38,7 +37,7 @@ public class EmployeeCRUDController {
 	EmployeeService employeeService;
 	
 	@ApiOperation(value = MyConstants.GET_EMP_API_DOC_VALUE, nickname = MyConstants.GET_EMP_API_DOC_VALUE, notes = MyConstants.GET_EMP_API_DOC_NOTES)
-	@GetMapping(MyConstants.EMP_ENDPOINT + "/{name}")
+	@GetMapping("/get-employee/{name}")
 	@ResponseBody
 	public HttpEntity<Employee> getEmployeeDetails(@PathVariable String name) {
 		HttpStatus httpStatus = HttpStatus.OK;
@@ -55,41 +54,23 @@ public class EmployeeCRUDController {
 	}
 	
 	@ApiOperation(value = MyConstants.GET_EMP_DEP_DOC_VALUE, nickname = MyConstants.GET_EMP_DEP_DOC_VALUE, notes = MyConstants.GET_EMP_DEP_DOC_NOTES)
-	@GetMapping("/department/{departmentId}")
+	@GetMapping("/get-by-department/{departmentId}")
 	@ResponseBody
-	public HttpEntity<List<Employee>> findByDepartment(@PathVariable("departmentId") Long departmentId) {
+	public List<Employee> findByDepartment(@PathVariable("departmentId") Long departmentId) {
 		LOGGER.info("Employee find: departmentId={}", departmentId);
-		HttpStatus httpStatus = HttpStatus.OK;
-		List<Employee> employees = new ArrayList<>();
-		try {
-			employees = employeeService.findByDepartmentId(departmentId);
-		}
-		catch (Exception ex) {
-			LOGGER.info("Error while find by Department :: " + ex);
-			httpStatus = HttpStatus.NOT_FOUND;
-		}
-		return new ResponseEntity<List<Employee>>(employees, httpStatus);
+		return employeeService.findByDepartmentId(departmentId);
 	}
 	
 	@ApiOperation(value = MyConstants.GET_EMP_ORG_DOC_VALUE, nickname = MyConstants.GET_EMP_ORG_DOC_VALUE, notes = MyConstants.GET_EMP_ORG_DOC_NOTES)
-	@GetMapping("/organization/{organizationId}")
+	@GetMapping("/get-by-organization/{organizationId}")
 	@ResponseBody
-	public HttpEntity<List<Employee>> findByOrganization(@PathVariable("organizationId") Long organizationId) {
+	public List<Employee> findByOrganization(@PathVariable("organizationId") Long organizationId) {
 		LOGGER.info("Employee find: organizationId={}", organizationId);
-		HttpStatus httpStatus = HttpStatus.OK;
-		List<Employee> employees = new ArrayList<>();
-		try {
-			employees = employeeService.findByOrganizationId(organizationId);
-		}
-		catch (Exception ex) {
-			LOGGER.info("Error while find by Organization :: " + ex);
-			httpStatus = HttpStatus.NOT_FOUND;
-		}
-		return new ResponseEntity<List<Employee>>(employees, httpStatus);
+		return employeeService.findByOrganizationId(organizationId);
 	}
 	
 	@ApiOperation(value = MyConstants.ADD_EMP_API_DOC_VALUE, nickname = MyConstants.ADD_EMP_API_DOC_VALUE, notes = MyConstants.ADD_EMP_API_DOC_NOTES)
-	@PostMapping(value = MyConstants.ADD_EMP_ENDPOINT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/add-employee", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpEntity<Employee> registerEmployee(@RequestBody Employee employee) {
 		HttpStatus httpStatus = HttpStatus.OK;
@@ -106,7 +87,7 @@ public class EmployeeCRUDController {
 	}
 
 	@ApiOperation(value = MyConstants.DEL_EMP_API_DOC_VALUE, nickname = MyConstants.DEL_EMP_API_DOC_VALUE, notes = MyConstants.DEL_EMP_API_DOC_NOTES)
-	@DeleteMapping(MyConstants.EMP_ENDPOINT + "/{name}")
+	@DeleteMapping("/delete-employee/{name}")
 	@ResponseBody
 	public HttpEntity<Void> deleteEmployee(@PathVariable String name) {
 		HttpStatus httpStatus = HttpStatus.OK;
@@ -122,7 +103,7 @@ public class EmployeeCRUDController {
 	}
 	
     @ApiOperation(value = MyConstants.UPD_EMP_API_DOC_VALUE, nickname = MyConstants.UPD_EMP_API_DOC_VALUE, notes = MyConstants.UPD_EMP_API_DOC_NOTES)
-    @PutMapping(MyConstants.MOD_EMP_ENDPOINT)
+    @PutMapping("/update-employee")
     @ResponseBody
     public HttpEntity<Void> updateEmployee(@RequestBody Employee employee) {
 		HttpStatus httpStatus = HttpStatus.OK;

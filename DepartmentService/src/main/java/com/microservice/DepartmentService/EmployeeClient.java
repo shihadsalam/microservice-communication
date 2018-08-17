@@ -11,7 +11,7 @@ import com.microservice.DepartmentService.model.Employee;
 @FeignClient(name = "EmployeeService")
 public interface EmployeeClient {
 
-	@GetMapping("/department/{departmentId}")
-	List<Employee> findByDepartment(@PathVariable("departmentId") Long departmentId);
+	@GetMapping("/get-by-department/{departmentId}")
+	public List<Employee> findByDepartment(@PathVariable("departmentId") Long departmentId);
 	
 }
