@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.microservice.EmployeeService.MyConstants;
+import com.microservice.EmployeeService.Constants;
 import com.microservice.EmployeeService.model.Employee;
 import com.microservice.EmployeeService.service.EmployeeService;
 
@@ -36,7 +36,7 @@ public class EmployeeCRUDController {
 	@Autowired
 	EmployeeService employeeService;
 	
-	@ApiOperation(value = MyConstants.GET_EMP_API_DOC_VALUE, nickname = MyConstants.GET_EMP_API_DOC_VALUE, notes = MyConstants.GET_EMP_API_DOC_NOTES)
+	@ApiOperation(value = Constants.GET_EMP_DOC, nickname = Constants.GET_EMP_DOC, notes = Constants.GET_EMP_NOTES)
 	@GetMapping("/get-employee/{name}")
 	@ResponseBody
 	public HttpEntity<Employee> getEmployeeDetails(@PathVariable String name) {
@@ -53,7 +53,7 @@ public class EmployeeCRUDController {
 		return new ResponseEntity<>(retrievedEmployee, httpStatus);
 	}
 	
-	@ApiOperation(value = MyConstants.GET_EMP_DEP_DOC_VALUE, nickname = MyConstants.GET_EMP_DEP_DOC_VALUE, notes = MyConstants.GET_EMP_DEP_DOC_NOTES)
+	@ApiOperation(value = Constants.GET_EMP_DEP_DOC, nickname = Constants.GET_EMP_DEP_DOC, notes = Constants.GET_EMP_DEP_NOTES)
 	@GetMapping("/get-by-department/{departmentId}")
 	@ResponseBody
 	public List<Employee> findByDepartment(@PathVariable("departmentId") Long departmentId) {
@@ -61,7 +61,7 @@ public class EmployeeCRUDController {
 		return employeeService.findByDepartmentId(departmentId);
 	}
 	
-	@ApiOperation(value = MyConstants.GET_EMP_ORG_DOC_VALUE, nickname = MyConstants.GET_EMP_ORG_DOC_VALUE, notes = MyConstants.GET_EMP_ORG_DOC_NOTES)
+	@ApiOperation(value = Constants.GET_EMP_ORG_DOC, nickname = Constants.GET_EMP_ORG_DOC, notes = Constants.GET_EMP_ORG_NOTES)
 	@GetMapping("/get-by-organization/{organizationId}")
 	@ResponseBody
 	public List<Employee> findByOrganization(@PathVariable("organizationId") Long organizationId) {
@@ -69,7 +69,7 @@ public class EmployeeCRUDController {
 		return employeeService.findByOrganizationId(organizationId);
 	}
 	
-	@ApiOperation(value = MyConstants.ADD_EMP_API_DOC_VALUE, nickname = MyConstants.ADD_EMP_API_DOC_VALUE, notes = MyConstants.ADD_EMP_API_DOC_NOTES)
+	@ApiOperation(value = Constants.ADD_EMP_DOC, nickname = Constants.ADD_EMP_DOC, notes = Constants.ADD_EMP_NOTES)
 	@PostMapping(value = "/add-employee", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public HttpEntity<Employee> registerEmployee(@RequestBody Employee employee) {
@@ -86,7 +86,7 @@ public class EmployeeCRUDController {
 		return new ResponseEntity<Employee>(addedEmployee, httpStatus);
 	}
 
-	@ApiOperation(value = MyConstants.DEL_EMP_API_DOC_VALUE, nickname = MyConstants.DEL_EMP_API_DOC_VALUE, notes = MyConstants.DEL_EMP_API_DOC_NOTES)
+	@ApiOperation(value = Constants.DEL_EMP_DOC, nickname = Constants.DEL_EMP_DOC, notes = Constants.DEL_EMP_NOTES)
 	@DeleteMapping("/delete-employee/{name}")
 	@ResponseBody
 	public HttpEntity<Void> deleteEmployee(@PathVariable String name) {
@@ -102,7 +102,7 @@ public class EmployeeCRUDController {
 		return new ResponseEntity<>(httpStatus);
 	}
 	
-    @ApiOperation(value = MyConstants.UPD_EMP_API_DOC_VALUE, nickname = MyConstants.UPD_EMP_API_DOC_VALUE, notes = MyConstants.UPD_EMP_API_DOC_NOTES)
+    @ApiOperation(value = Constants.UPD_EMP_DOC, nickname = Constants.UPD_EMP_DOC, notes = Constants.UPD_EMP_NOTES)
     @PutMapping("/update-employee")
     @ResponseBody
     public HttpEntity<Void> updateEmployee(@RequestBody Employee employee) {
