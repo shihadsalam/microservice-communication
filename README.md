@@ -15,3 +15,6 @@ Department Microservice, which communicates with Employee Service.
 
 OrganizationService :
 Organization Microservice which communicates with Employee & Department Services. Spring Cloud Open Feign is used for the Client Communication.
+
+SwaggerGatewayService :
+API Gateway Service using Spring Zuul for the Communication
